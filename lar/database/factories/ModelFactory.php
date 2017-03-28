@@ -12,13 +12,21 @@
 */
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(App\User::class, function (Faker\Generator $faker) {
-    static $password;
+// $factory->define(App\User::class, function (Faker\Generator $faker) {
+//     static $password;
 
+//     return [
+//         'name' => $faker->name,
+//         'email' => $faker->unique()->safeEmail,
+//         'password' => $password ?: $password = bcrypt('secret'),
+//         'remember_token' => str_random(10),
+//     ];
+// });
+
+$factory->define(App\Post::class, function ($faker) {
     return [
-        'name' => $faker->name,
-        'email' => $faker->unique()->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
-        'remember_token' => str_random(10),
+        'title' => $faker->sentence(mt_rand(3, 10)),
+        'content' => join("\n\n", $faker->paragraphs(mt_rand(3,6))),
+        'published_at' => $faker->dateTimeBetween('-1 month', '+3 days'),
     ];
 });
