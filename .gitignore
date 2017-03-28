@@ -1,2 +1,5 @@
 #忽略提交的文件夹
 lar/storage
+#忽略调教的文件
+lar/.env
+lar/composer.lock
