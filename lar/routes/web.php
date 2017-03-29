@@ -15,7 +15,7 @@
 //     return view('welcome');
 // });
 
-Route::get('/', function(){
+Route::get('/', function() {
 	return redirect('/blog');
 });
 
