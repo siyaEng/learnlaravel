@@ -65,7 +65,7 @@
 @section('scripts')
     <script>
         $(function() {
-            $("#tags-table").DataTable({
+            $("#tags-table").dataTable({
             });
         });
     </script>
