@@ -34,12 +34,20 @@ Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function (){
 	Route::resource('admin/post', 'PostController');
 	Route::resource('admin/tag', 'TagController', ['except', 'show']);
 	Route::get('admin/upload', 'UploadController@index');
+	
+	Route::post('admin/upload/file', 'UploadController@uploadFile');
+	Route::delete('admin/upload/file', 'UploadController@deleteFile');
+	Route::post('admin/upload/folder', 'UploadController@createFolder');
+	Route::delete('admin/upload/folder', 'UploadController@deleteFolder');
+	
 });
 
-// Loggin in and out
-Route::get('auth/login', 'Auth\LoginController@login');
-//Route::get('auth/login', 'Auth\LoginController@postLogin');
-Route::get('auth/logout', 'Auth\LoginController@logout');
+Route::group(['namespace' => 'Auth'], function(){
+	// Loggin in and out
+	Route::get('auth/login', 'LoginController@login');
+	//Route::get('auth/login', 'Auth\LoginController@postLogin');
+	Route::get('auth/logout', 'LoginController@logout');
+});
 
 Auth::routes();
 
