@@ -31,8 +31,13 @@ Route::get('admin', function(){
 });
 
 Route::group(['namespace' => 'Admin', 'middleware' => 'auth'], function (){
-	Route::resource('admin/post', 'PostController');
-	Route::resource('admin/tag', 'TagController', ['except', 'show']);
+	Route::resource('admin/post', 'PostController', ['except' => 'show']);
+	//Route::post('admin/post/store', 'PostController@store');
+	//Route::post('admin/post/update/{id}', 'PostController@update');
+	//Route::post('admin/post/index', 'PostController@index');
+	//Route::delete('admin/post/destory', 'PostController@destory');
+
+	Route::resource('admin/tag', 'TagController', ['except' => 'show']);
 	Route::get('admin/upload', 'UploadController@index');
 	
 	Route::post('admin/upload/file', 'UploadController@uploadFile');
