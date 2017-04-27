@@ -17,7 +17,7 @@ class Post extends Model
      * @rerurn BelongsToMany
      */
     public function tags()
-    {
+    {   
     	return $this->belongsToMany('App\Tag', 'post_tag_pivot');
     }
 
@@ -135,7 +135,7 @@ class Post extends Model
         $tags = $this->tags()->pluck('tag');
         $return = [];
         foreach ($tags as $tag) {
-            $url = str_replace('%TAG%', urldecode($tag), $bsae);
+            $url = str_replace('%TAG%', urldecode($tag), $base);
             $return[] = '<a href="'.$url.'">'.e($tag).'</a>';
         }
 
@@ -167,7 +167,7 @@ class Post extends Model
     public function olderPost(Tag $tag = null)
     {
         $query = 
-            static::where('published_at', '<', $this->publised_at)
+            static::where('published_at', '<', $this->published_at)
             ->where('is_draft', 0)
             ->orderBy('published_at', 'desc');
 

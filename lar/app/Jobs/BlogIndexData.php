@@ -3,18 +3,14 @@
 namespace App\Jobs;
 
 use Illuminate\Bus\Queueable;
-use Illuminate\Queue\SerializesModels;
-use Illuminate\Queue\InteractsWithQueue;
-use Illuminate\Contracts\Queue\ShouldQueue;
 
 use App\Post;
 use App\Tag;
 use Carbon\Carbon;
 
-
-class BlogIndexData implements ShouldQueue
+class BlogIndexData
 {
-    use InteractsWithQueue, Queueable, SerializesModels;
+    use Queueable;
 
     protected $tag;
 
@@ -38,7 +34,6 @@ class BlogIndexData implements ShouldQueue
         if($this->tag) {
             return $this->tagIndexData($this->tag);
         }
-
         return $this->normalIndexData();
     }
 
@@ -53,7 +48,7 @@ class BlogIndexData implements ShouldQueue
             ->where('is_draft', 0)
             ->orderBy('published_at', 'desc')
             ->simplePaginate(config('blog.posts_per_page'));
-
+            
         return [
             'title' => config('blog.title'),
             'subtitle' => config('blog.subtitle'),

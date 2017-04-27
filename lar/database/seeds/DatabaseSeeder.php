@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Eloquent\Model;
 
 class DatabaseSeeder extends Seeder
 {
@@ -11,17 +12,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
-        //Model::unguard();
-        $this->call(PostTableSeeder::class);
-    }
-}
+        
+        Model::unguard();
 
-class PostTableSeeder extends Seeder
-{
-    public function run()
-    {
-        App\Post::truncate();
-        factory(App\Post::class, 20)->create();
+        $this->call(TagTableSeeder::class);
+        $this->call(PostTableSeeder::class);
+
+        Model::reguard();
     }
 }
