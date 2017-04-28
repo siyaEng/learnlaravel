@@ -11,4 +11,5 @@ return [
 		'storage' => 'local',
 		'webpath' => '/uploads/',
 	],
+	'contact_email' => '13661189714@163.com',
 ];
