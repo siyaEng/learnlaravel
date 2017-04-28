@@ -8,6 +8,7 @@
         "php": ">=5.6.4",
         "dflydev/apache-mime-types": "^1.0",
         "doctrine/dbal": "^2.5",
+        "guzzlehttp/guzzle": "^6.2",
         "laravel/framework": "5.3.*",
         "michelf/php-markdown": "^1.7",
         "michelf/php-smartypants": "^1.8"
