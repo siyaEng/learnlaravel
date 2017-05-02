@@ -17,13 +17,13 @@ class RssFeed
 	 */
 	public function getRss()
 	{	
-		// if(Cache::has('rss-feed')) {
-		// 	return Cache::get('rss-feed');
-		// }
+		if(Cache::has('rss-feed')) {
+			return Cache::get('rss-feed');
+		}
 
 		$rss = $this->buildRssData();
 		
-		//Cache::add('rss-feed', $rss, 120);
+		Cache::add('rss-feed', $rss, 120);
 
 		return $rss;
 	}
@@ -56,6 +56,7 @@ class RssFeed
 			$item = new Item();
 
 			$url = trim($post->url(), '');
+			//$url = $post->url();
 			$item->title($post->title)
 				 ->description($post->subtitle)
 				 ->url($url)
