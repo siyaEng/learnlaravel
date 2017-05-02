@@ -1,10 +1,10 @@
 <?php
 return [
-	'name' => 'Laravel 学院',
-	'title' => 'Laravel 学院',
+	'name' => "siya's blog",
+	'title' => "siya's php blog",
 	'subtitle' => 'www.siya89.com',
-	'description' => 'Laravel学院致力于提供优质Laravel中文学习资源',
-	'author' => '学院君',
+	'description' => "分享php开发中的点点滴滴",
+	'author' => 'siya',
 	'page_image' => 'home-bg.jpg',
 	'posts_per_page' => 10,
 	'rss_size' => 25,

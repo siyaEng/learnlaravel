@@ -28,6 +28,7 @@ Route::get('contact', 'ContactController@showForm');
 Route::post('contact', 'ContactController@sendContactInfo');
 
 Route::get('rss', 'BlogController@rss');
+Route::get('sitemap.xml', 'BlogController@siteMap');
 // Admin area
 
 Route::get('admin', function(){

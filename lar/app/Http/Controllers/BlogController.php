@@ -10,6 +10,7 @@ use App\Post;
 use App\Tag;
 use Carbon\Carbon;
 use App\Services\RssFeed;
+use App\Services\SiteMap;
 
 use Symfony\Component\HttpFoundation\Response;
 
@@ -40,8 +41,16 @@ class BlogController extends Controller
     public function rss(RssFeed $feed)
     {   
         $rss = $feed->getRss();
-         
+    
         return response($rss)
-            ->header('Content-type', 'application/rss+xml');
+                ->header('Content-type', 'application/rss+xml');
+    }
+
+    public function siteMap(SiteMap $siteMap)
+    {
+        $map = $siteMap->getSiteMap();
+
+        return response($map)
+            ->header('Content-type', 'text/xml');
     }
 }

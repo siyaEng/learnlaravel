@@ -36,16 +36,17 @@ class RssFeed
 	{
 		$now = Carbon::now();
 		$feed = new Feed();
+		
 		$channel = new Channel();
 		$channel
 			->title(config('blog.title'))
 			->description(config('blog.description'))
-			->url(url())
+			->url(url('/'))
 			->language('en')
 			->copyright('Copyright (c)'.config('blog.author'))
 			->lastBuildDate($now->timestamp)
 			->appendTo($feed);
-
+		
 		$posts = Post::where('published_at', '<=', $now)
 			->where('is_draft', 0)
 			->orderBy('published_at', 'desc')
@@ -54,18 +55,30 @@ class RssFeed
 		
 		foreach ($posts as $post) {
 			$item = new Item();
-
-			$url = trim($post->url(), '');
-			//$url = $post->url();
+			
 			$item->title($post->title)
 				 ->description($post->subtitle)
-				 ->url($url)
+				 ->url($post->url())
 				 ->pubDate($post->published_at->timestamp)
 				 ->guid($post->url(), true)
 				 ->appendTo($channel);
+
 		}
+
+		$feed = (string)$feed;
 		
-		$feed = (String)$feed;
+		//Replace a couple items to make the feed more compliant
+	    $feed = str_replace(
+	      '<rss version="2.0">',
+	      '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">',
+	      $feed
+	    );
+	    $feed = str_replace(
+	      '<channel>',
+	      '<channel>'."\n".'    <atom:link href="'.url('/rss').
+	      '" rel="self" type="application/rss+xml" />',
+	      $feed
+	    );
 		
 		return $feed;
 	}
