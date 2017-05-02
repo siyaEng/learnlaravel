@@ -9,6 +9,9 @@ use App\Http\Requests;
 use App\Post;
 use App\Tag;
 use Carbon\Carbon;
+use App\Services\RssFeed;
+
+use Symfony\Component\HttpFoundation\Response;
 
 class BlogController extends Controller
 {
@@ -32,5 +35,13 @@ class BlogController extends Controller
         }
 
         return view($post->layout, compact('post', 'tag', 'slug'));
+    }
+
+    public function rss(RssFeed $feed)
+    {   
+        $rss = $feed->getRss();
+         
+        return response($rss)
+            ->header('Content-type', 'application/rss+xml');
     }
 }

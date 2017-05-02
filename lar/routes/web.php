@@ -27,6 +27,7 @@ Route::get('blog/{slug}', 'BlogController@showPost');
 Route::get('contact', 'ContactController@showForm');
 Route::post('contact', 'ContactController@sendContactInfo');
 
+Route::get('rss', 'BlogController@rss');
 // Admin area
 
 Route::get('admin', function(){
