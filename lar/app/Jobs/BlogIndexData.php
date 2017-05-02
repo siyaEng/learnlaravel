@@ -60,11 +60,12 @@ class BlogIndexData
         ];
     }
 
-    protected function tagIndexData()
-    {
+    protected function tagIndexData($tag)
+    {   
         $tag = Tag::where('tag', $tag)->firstOrFail();
-        $reverse_direction = (bool)$tag->reverse_direction;
 
+        $reverse_direction = (boolean)$tag->reverse_direction;
+      
         $posts = Post::where('published_at', '<=', Carbon::now())
             ->whereHas('tags', function ($q) use ($tag) {
                 $q->where('tag', '=', $tag->tag);
@@ -76,7 +77,7 @@ class BlogIndexData
         $posts->addQuery('tag', $tag->tag);
 
         $page_image = $tag->page_image ?: config('blog.page_image');
-
+        
         return [
             'title' => $tag->title,
             'subtitle' => $tag->subtitle,
